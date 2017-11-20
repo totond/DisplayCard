@@ -10,6 +10,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/dc"
+        app:mode="PICTURE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:contentPadding="20dp"
