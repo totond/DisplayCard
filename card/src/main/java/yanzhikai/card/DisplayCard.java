@@ -1,7 +1,7 @@
 package yanzhikai.card;
-
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
@@ -25,6 +25,9 @@ public class DisplayCard extends CardView {
     @Retention(RetentionPolicy.SOURCE)
     public  @interface DisplayMode {}
     private @DisplayMode int mDisplayMode = NO_PICTURE;
+
+    private int mTextSize = 16, mTitleSize = 30;
+    private @ColorInt int mTextColor = getResources().getColor(R.color.colorLightBlack),mTitleColor = 0xff000000;
 
     private TextView tv_tittle, tv_text;
     private ImageView iv_picture;
@@ -50,7 +53,10 @@ public class DisplayCard extends CardView {
     private void initAttrs(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.DisplayCard, 0, 0);
         mDisplayMode = typedArray.getInt(R.styleable.DisplayCard_mode,mDisplayMode);
-
+        mTextSize = typedArray.getInt(R.styleable.DisplayCard_textSize, mTextSize);
+        mTextColor = typedArray.getInt(R.styleable.DisplayCard_textColor, mTextColor);
+        mTitleSize = typedArray.getInt(R.styleable.DisplayCard_titleSize, mTitleSize);
+        mTitleColor = typedArray.getInt(R.styleable.DisplayCard_titleColor,mTitleColor);
     }
 
     private void init(Context context) {
@@ -68,6 +74,10 @@ public class DisplayCard extends CardView {
         tv_text = (TextView) findViewById(R.id.tv_text);
         iv_picture = (ImageView) findViewById(R.id.iv_picture);
 
+        setTextSize(mTextSize);
+        setTittleSize(mTitleSize);
+        setTextColor(mTextColor);
+        setTittleColor(mTitleColor);
     }
 
     public void loadPicture(Context context, String url) {
@@ -102,5 +112,9 @@ public class DisplayCard extends CardView {
 
     public void setTextColor(int color) {
         tv_text.setTextColor(color);
+    }
+
+    public void setDisplayMode(int displayMode) {
+        this.mDisplayMode = displayMode;
     }
 }
